@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "settings": {
+    "plugins": [
+      "import"
+    ],
+    "rules": {
+      "import/no-unresolved": "error"
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}
