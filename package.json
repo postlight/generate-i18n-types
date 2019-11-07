@@ -4,10 +4,12 @@
   "description": "Generate il8n string types",
   "main": "cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "release": "standard-version",
+    "lint": "eslint cli.js --fix",
+    "format": "prettier --write cli.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Postlight",
+  "license": "",
   "bin": {
     "generate-i18n-types": "./cli.js"
   },
@@ -18,6 +20,7 @@
     "yargs": "^14.2.0"
   },
   "devDependencies": {
+    "@types/node": "^12.12.6",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.5.0",
@@ -25,7 +28,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
-    "@types/node": "^12.12.6",
-    "prettier": "1.18.2"
+    "prettier": "1.18.2",
+    "standard-version": "^7.0.0"
   }
 }

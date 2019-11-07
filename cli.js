@@ -103,6 +103,7 @@ const generateTypes = async obj => {
     .filter(Boolean)
     .join('\n')}function translate(key: ${stringEnum}): string`;
 
+  // Write content to util file
   const i18nPath = path.resolve(__dirname, argv.util);
   const i18nPathDir = argv.util.slice(0, argv.util.lastIndexOf('/'));
   const stringTypesPath = argv.stringTypes.replace(
