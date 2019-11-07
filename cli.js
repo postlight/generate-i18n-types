@@ -144,7 +144,7 @@ const generateTypes = async obj => {
     '    const { t } = i18n;\n' +
     '    boundT = t.bind(i18n);\n' +
     '    return boundT(key, data);\n' +
-    '}\n\n export default translate;';
+    '}\n\nexport default translate;';
 
   const content = `${comments}\n\n${imports}\n\nexport {  ${stringEnum}, ${stringArgsEnum} } from '${path.relative(
     i18nPathDir,

@@ -1,0 +1,54 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/project
+  docker:
+    - image: circleci/node:8.10-browsers
+
+jobs:
+  test-node:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: 'yarn install'
+      - run: 'yarn test'
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
+
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/project/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish --access public
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test-node:
+          filters:  # required since `deploy` has tag filters AND requires `test-node`
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+      - test-web:
+          filters:  # required since `deploy` has tag filters AND requires `test-web`
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - test-node
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

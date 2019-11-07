@@ -1,0 +1,14 @@
+{
+  "plugins": [
+  ["@babel/plugin-transform-runtime",
+    {
+      "regenerator": true
+    }
+  ]
+],
+  "env": {
+    "test": {
+      "presets": [["@babel/preset-env", { "modules": "commonjs" }]]
+    }
+  }
+}
