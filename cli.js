@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { argv } = require('yargs');
+const argv = process.argv.slice(2);
 const fs = require('fs');
 const yaml = require('js-yaml');
 const path = require('path');
@@ -10,7 +10,7 @@ const { translation } = yaml.safeLoad(
   fs.readFileSync(path.resolve(__dirname, argv.translations), 'utf8')
 );
 
-const getKeyStrings = (obj, initialKey = '') => {
+export const getKeyStrings = (obj, initialKey = '') => {
   const keys = Reflect.ownKeys(obj);
   return keys.map(key =>
     typeof obj[key] === 'string'
@@ -19,20 +19,20 @@ const getKeyStrings = (obj, initialKey = '') => {
   );
 };
 
-const getString = (obj, key) =>
+export const getString = (obj, key) =>
   key.split('.').reduce((acc, key) => acc[key], obj);
 
-const getAllStrings = obj => {
+export const getAllStrings = obj => {
   return flattenDeep(getKeyStrings(obj)).map(s => s.slice(1));
 };
 
-const toType = key =>
+export const toType = key =>
   key
     .split('.')
     .map(s => s.slice(0, 1).toUpperCase() + s.slice(1))
     .join('');
 
-const generateTypes = async obj => {
+export const generateTypes = async obj => {
   // Turn json to key strings
   const keyStringsArr = getAllStrings(obj);
 
@@ -101,7 +101,7 @@ const generateTypes = async obj => {
         );
     })
     .filter(Boolean)
-    .join('\n')}function translate(key: ${stringEnum}): string`;
+    .join('\n')}\nfunction translate(key: ${stringEnum}): string;`;
 
   // Write content to util file
   const i18nPath = path.resolve(__dirname, argv.util);
@@ -157,3 +157,11 @@ const generateTypes = async obj => {
 };
 
 generateTypes(translation);
+
+module.exports = {
+  getString,
+  getKeyStrings,
+  getAllStrings,
+  generateTypes,
+  toType,
+};
