@@ -1,14 +1,14 @@
-import {
+const fs = require('fs');
+const {
   toType,
   generateTypes,
   getAllStrings,
   getKeyStrings,
   getString,
-} from '../cli';
-import { translation } from './test-helpers';
+} = require('../cli');
+const { translation } = require('./test-helpers');
 
 jest.mock('fs');
-jest.mock('path');
 
 describe('generate-i18n-types', () => {
   it('should have toType return correct type format', () => {
@@ -16,7 +16,7 @@ describe('generate-i18n-types', () => {
     expect(toType(key)).toBe('AuthFirstText');
   });
 
-  it('should have getAllStrings return array of key strings', () => {
+  it('should have getAllStrings return array of keys', () => {
     const stringsArray = [
       'appName',
       'supportEmail',
@@ -36,7 +36,7 @@ describe('generate-i18n-types', () => {
     );
   });
 
-  it('should have getKeyStrings return string for key', () => {
+  it('should have getKeyStrings return array of initial keys', () => {
     const keyStringsArray = [
       '.appName',
       '.supportEmail',
@@ -49,5 +49,11 @@ describe('generate-i18n-types', () => {
       ],
     ];
     expect(getKeyStrings(translation)).toStrictEqual(keyStringsArray);
+  });
+
+  it('should have generateTypes generates 2 files', async () => {
+    await generateTypes(translation);
+    expect(fs.writeFileSync).toBeCalledTimes(2);
+    expect(fs.writeFileSync.mock.calls).toMatchSnapshot();
   });
 });

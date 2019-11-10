@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-const argv = process.argv.slice(2);
+const argv = require('yargs-parser')(process.argv.slice(2));
 const fs = require('fs');
 const yaml = require('js-yaml');
 const path = require('path');
 const { flattenDeep } = require('lodash');
 
 const { translation } = yaml.safeLoad(
-  fs.readFileSync(path.resolve(__dirname, argv.translations), 'utf8')
+  fs.readFileSync(`./${argv.translations}`, 'utf8')
 );
 
-export const getKeyStrings = (obj, initialKey = '') => {
+const getKeyStrings = (obj, initialKey = '') => {
   const keys = Reflect.ownKeys(obj);
   return keys.map(key =>
     typeof obj[key] === 'string'
@@ -19,27 +19,27 @@ export const getKeyStrings = (obj, initialKey = '') => {
   );
 };
 
-export const getString = (obj, key) =>
+const getString = (obj, key) =>
   key.split('.').reduce((acc, key) => acc[key], obj);
 
-export const getAllStrings = obj => {
+const getAllStrings = obj => {
   return flattenDeep(getKeyStrings(obj)).map(s => s.slice(1));
 };
 
-export const toType = key =>
+const toType = key =>
   key
     .split('.')
     .map(s => s.slice(0, 1).toUpperCase() + s.slice(1))
     .join('');
 
-export const generateTypes = async obj => {
-  // Turn json to key strings
+const generateTypes = async obj => {
+  // Turn json to key utils
   const keyStringsArr = getAllStrings(obj);
 
-  // Generate string enum names that map to key strings
+  // Generate string enum names that map to key utils
   const stringsAsEnumProp = keyStringsArr.map(toType);
 
-  // Identify strings that require data
+  // Identify utils that require data
   const allStrings = keyStringsArr.map(key => getString(obj, key));
   const dataRe = /\{\{(\w+)\}\}/g;
   const stringsWithData = allStrings.map(str => {
@@ -104,9 +104,9 @@ export const generateTypes = async obj => {
     .join('\n')}\nfunction translate(key: ${stringEnum}): string;`;
 
   // Write content to util file
-  const i18nPath = path.resolve(__dirname, argv.util);
+  const i18nPath = `./${argv.util}`;
   const i18nPathDir = argv.util.slice(0, argv.util.lastIndexOf('/'));
-  const stringTypesPath = argv.stringTypes.replace(
+  const stringTypesDir = argv.stringTypes.replace(
     path.extname(argv.stringTypes),
     ''
   );
@@ -126,7 +126,7 @@ export const generateTypes = async obj => {
 
   const imports = `import i18n from 'i18next';\nimport yaml from 'js-yaml';\nimport fs from 'fs';\nimport { ${stringEnum}, ${stringArgsEnum} } from '${path.relative(
     i18nPathDir,
-    stringTypesPath
+    stringTypesDir
   )}';`;
 
   const translate =
@@ -148,7 +148,7 @@ export const generateTypes = async obj => {
 
   const content = `${comments}\n\n${imports}\n\nexport {  ${stringEnum}, ${stringArgsEnum} } from '${path.relative(
     i18nPathDir,
-    stringTypesPath
+    stringTypesDir
   )}';\n\nlet boundT: typeof i18n.t;\n\n${readTranslation}${
     sigils[0]
   }\n${overloadedSignatures}\n${sigils[1]}\n\n${translate}`;
@@ -159,8 +159,8 @@ export const generateTypes = async obj => {
 generateTypes(translation);
 
 module.exports = {
-  getString,
   getKeyStrings,
+  getString,
   getAllStrings,
   generateTypes,
   toType,

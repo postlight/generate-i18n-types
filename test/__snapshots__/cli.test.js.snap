@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generate-i18n-types should have generateTypes generate 2 files 1`] = `
+Array [
+  Array [
+    "./src/types/strings.ts",
+    "/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+export enum I18NStringsWithArgs {
+  AuthFirstText = 'authFirst.text',
+}
+
+export enum I18NStrings {
+  AppName = 'appName',
+  SupportEmail = 'supportEmail',
+  SharedContactSupport = 'shared.contactSupport',
+  ErrorsInvalidDate = 'errors.invalidDate',
+  ErrorsPromptToEndMissingValue = 'errors.promptToEndMissingValue',
+  ErrorsMissingIds = 'errors.missingIds',
+}",
+  ],
+  Array [
+    "./src/utils/i18n.ts",
+    "/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+import i18n from 'i18next';
+import yaml from 'js-yaml';
+import fs from 'fs';
+import { I18NStrings, I18NStringsWithArgs } from '../types/strings';
+
+export {  I18NStrings, I18NStringsWithArgs } from '../types/strings';
+
+let boundT: typeof i18n.t;
+
+const en = yaml.safeLoad(
+    fs.readFileSync('../../locales/en/translation.yml', 'utf8')
+);
+
+// ==== START OVERLOADED SIGNATURES
+function translate(
+  key: I18NStringsWithArgs.AuthFirstText,
+  { url }: { url: string }
+): string;
+function translate(key: I18NStrings): string;
+// ==== END OVERLOADED SIGNATURES
+
+function translate(key: string, data?: { [key: string]: string }) {
+    if (boundT) {
+        return boundT(key, data);
+    }
+    i18n.init({
+        lng: 'en',
+        resources: { en },
+        interpolation: {
+            escapeValue: false,
+        },
+    });
+    const { t } = i18n;
+    boundT = t.bind(i18n);
+    return boundT(key, data);
+}
+
+export default translate;",
+  ],
+]
+`;

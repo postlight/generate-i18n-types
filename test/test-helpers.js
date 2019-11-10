@@ -1,4 +1,4 @@
-export const translation = {
+const translation = {
   appName: 'My App',
   supportEmail: 'hello@my-app.com',
   shared: {
@@ -13,4 +13,8 @@ export const translation = {
     promptToEndMissingValue: 'Error 100, please $t(shared.contactSupport).',
     missingIds: 'Error 101, please $t(shared.contactSupport).',
   },
+};
+
+module.exports = {
+  translation,
 };
