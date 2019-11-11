@@ -10,6 +10,7 @@ Array [
 
 export enum I18NStringsWithArgs {
   AuthFirstText = 'authFirst.text',
+  ErrorsInvalidUsers = 'errors.invalidUsers',
 }
 
 export enum I18NStrings {
@@ -17,7 +18,6 @@ export enum I18NStrings {
   SupportEmail = 'supportEmail',
   SharedContactSupport = 'shared.contactSupport',
   ErrorsInvalidDate = 'errors.invalidDate',
-  ErrorsPromptToEndMissingValue = 'errors.promptToEndMissingValue',
   ErrorsMissingIds = 'errors.missingIds',
 }",
   ],
@@ -44,6 +44,10 @@ const en = yaml.safeLoad(
 function translate(
   key: I18NStringsWithArgs.AuthFirstText,
   { url }: { url: string }
+): string;
+function translate(
+  key: I18NStringsWithArgs.ErrorsInvalidUsers,
+  { invalidUsers }: { invalidUsers: string }
 ): string;
 function translate(key: I18NStrings): string;
 // ==== END OVERLOADED SIGNATURES

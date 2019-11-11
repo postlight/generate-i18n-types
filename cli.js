@@ -155,7 +155,9 @@ const generateTypes = async obj => {
   fs.writeFileSync(i18nPath, content);
 };
 
-generateTypes(translation);
+if (translation) {
+  generateTypes(translation);
+}
 
 module.exports = {
   getKeyStrings,

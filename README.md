@@ -14,7 +14,7 @@ The package also requires installation of `i18next` and `js-yaml`
 
 This generator accepts 3 arguments to generate your i18n types
 ```shell
-$ generate-i18n-types --translations=path/to/translation.yml --stringTypes=path/to/strings.ts --util=path/to/translate.ts
+$ generate-i18n-types --translations=path/to/translation.yml --stringTypes=path/to/strings.ts --util=path/to/i18n.ts
 ```
 
 `--translations`
@@ -25,6 +25,10 @@ This is the path to the file where you want the generated string types to reside
 
 `--util`
 This is the path to the file where you want the generated translation functions for the string types to reside.
+
+Note:
+You may require additional formatting of the generated util file. Using Prettier as an example, you can just add the following additional command to the above
+`&& prettier --write ./path/to/i18n.ts`
 
 Once the command succeeds, the files you provided will have the necessary string types and translation functions. Enjoy!
 

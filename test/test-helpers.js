@@ -10,11 +10,9 @@ const translation = {
   },
   errors: {
     invalidDate: 'Error 110, please $t(shared.contactSupport).',
-    promptToEndMissingValue: 'Error 100, please $t(shared.contactSupport).',
     missingIds: 'Error 101, please $t(shared.contactSupport).',
+    invalidUsers: 'The following people could not be invited: {{invalidUsers}}',
   },
 };
 
-module.exports = {
-  translation,
-};
+export default translation;

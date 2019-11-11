@@ -1,12 +1,12 @@
-const fs = require('fs');
-const {
+import fs from 'fs';
+import {
   toType,
   generateTypes,
   getAllStrings,
   getKeyStrings,
   getString,
-} = require('../cli');
-const { translation } = require('./test-helpers');
+} from '../cli';
+import translation from './test-helpers';
 
 jest.mock('fs');
 
@@ -23,8 +23,8 @@ describe('generate-i18n-types', () => {
       'shared.contactSupport',
       'authFirst.text',
       'errors.invalidDate',
-      'errors.promptToEndMissingValue',
       'errors.missingIds',
+      'errors.invalidUsers',
     ];
     expect(getAllStrings(translation)).toStrictEqual(stringsArray);
   });
@@ -42,16 +42,12 @@ describe('generate-i18n-types', () => {
       '.supportEmail',
       ['.shared.contactSupport'],
       ['.authFirst.text'],
-      [
-        '.errors.invalidDate',
-        '.errors.promptToEndMissingValue',
-        '.errors.missingIds',
-      ],
+      ['.errors.invalidDate', '.errors.missingIds', '.errors.invalidUsers'],
     ];
     expect(getKeyStrings(translation)).toStrictEqual(keyStringsArray);
   });
 
-  it('should have generateTypes generates 2 files', async () => {
+  it('should have generateTypes generate 2 files', async () => {
     await generateTypes(translation);
     expect(fs.writeFileSync).toBeCalledTimes(2);
     expect(fs.writeFileSync.mock.calls).toMatchSnapshot();
