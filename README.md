@@ -5,7 +5,7 @@
 ## Installation
 
 ```shell
-$ yarn add generate-18n-types i18next js-yaml
+$ yarn add @postlight/generate-18n-types i18next js-yaml
 ```
 
 The package also requires installation of `i18next` and `js-yaml`
