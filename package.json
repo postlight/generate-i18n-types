@@ -4,7 +4,6 @@
   "description": "Generate il8n string types",
   "main": "cli.js",
   "scripts": {
-    "release": "standard-version",
     "lint": "eslint \"**/*.js\" --fix",
     "format": "prettier --write \"**/*.js\"",
     "test": "jest --updateSnapshot --translations=locales/en/translation.yml --stringTypes=src/types/strings.ts --util=src/utils/i18n.ts"
@@ -46,7 +45,6 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "jest": "^24.9.0",
-    "prettier": "1.18.2",
-    "standard-version": "^7.0.0"
+    "prettier": "1.18.2"
   }
 }
