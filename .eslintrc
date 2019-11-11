@@ -4,13 +4,8 @@
     "prettier"
   ],
   "globals": {
-  "afterAll": true,
-  "afterEach": true,
-  "beforeAll": true,
-  "beforeEach": true,
   "describe": true,
   "expect": true,
-  "fit": true,
   "it": true,
   "jest": true
 },
@@ -20,9 +15,6 @@
     ],
     "rules": {
       "import/no-unresolved": "error"
-    },
-    "import/resolver": {
-      "typescript": {}
     }
   }
 }

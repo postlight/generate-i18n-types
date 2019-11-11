@@ -11,7 +11,9 @@ jobs:
     steps:
       - checkout
       - run: 'yarn install'
+      - run: 'yarn lint'
       - run: 'yarn test'
+
       - persist_to_workspace:
           root: ~/project
           paths: .
@@ -34,12 +36,6 @@ workflows:
     jobs:
       - test-node:
           filters:  # required since `deploy` has tag filters AND requires `test-node`
-            branches:
-              only: /.*/
-            tags:
-              only: /.*/
-      - test-web:
-          filters:  # required since `deploy` has tag filters AND requires `test-web`
             branches:
               only: /.*/
             tags:

@@ -19,8 +19,7 @@ const getKeyStrings = (obj, initialKey = '') => {
   );
 };
 
-const getString = (obj, key) =>
-  key.split('.').reduce((acc, key) => acc[key], obj);
+const getString = (obj, key) => key.split('.').reduce((acc, k) => acc[k], obj);
 
 const getAllStrings = obj => {
   return flattenDeep(getKeyStrings(obj)).map(s => s.slice(1));
@@ -64,12 +63,12 @@ const generateTypes = async obj => {
   const stringEnum = 'I18NStrings';
   const comments = `/* tslint:disable */\n/* eslint-disable */\n// This file was automatically generated and should not be edited.`;
 
-  const enumsWithArgsString = `${stringsWithArgs.reduce((acc, key, index) => {
+  const enumsWithArgsString = `${stringsWithArgs.reduce((acc, key) => {
     return `${acc}
   ${toType(key)} = '${key}',`;
   }, `export enum ${stringArgsEnum} {`)}
 }`;
-  const enumNoArgsString = `${noArgsStrings.reduce((acc, key, index) => {
+  const enumNoArgsString = `${noArgsStrings.reduce((acc, key) => {
     return `${acc}
   ${toType(key)} = '${key}',`;
   }, `export enum ${stringEnum} {`)}
@@ -89,7 +88,7 @@ const generateTypes = async obj => {
   const overloadedSignatures = `${stringsWithData
     .map((arr, index) => {
       if (arr === null) {
-        return;
+        return false;
       }
       return overloadedSignature
         .replace('REPLACE_ENUM', stringsAsEnumProp[index])

@@ -8,7 +8,8 @@
     "lint": "eslint \"**/*.js\" --fix",
     "format": "prettier --write \"**/*.js\"",
     "test": "jest --translations=locales/en/translation.yml --stringTypes=src/types/strings.ts --util=src/utils/i18n.ts",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watch",
+    "test:updateSnapshot": "jest --updateSnapshot"
   },
   "author": "Postlight",
   "license": "MIT",
