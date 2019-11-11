@@ -16,9 +16,6 @@ export enum I18NStringsWithArgs {
 export enum I18NStrings {
   AppName = 'appName',
   SupportEmail = 'supportEmail',
-  SharedContactSupport = 'shared.contactSupport',
-  ErrorsInvalidDate = 'errors.invalidDate',
-  ErrorsMissingIds = 'errors.missingIds',
 }",
   ],
   Array [

@@ -20,10 +20,7 @@ describe('generate-i18n-types', () => {
     const stringsArray = [
       'appName',
       'supportEmail',
-      'shared.contactSupport',
       'authFirst.text',
-      'errors.invalidDate',
-      'errors.missingIds',
       'errors.invalidUsers',
     ];
     expect(getAllStrings(translation)).toStrictEqual(stringsArray);
@@ -40,9 +37,8 @@ describe('generate-i18n-types', () => {
     const keyStringsArray = [
       '.appName',
       '.supportEmail',
-      ['.shared.contactSupport'],
       ['.authFirst.text'],
-      ['.errors.invalidDate', '.errors.missingIds', '.errors.invalidUsers'],
+      ['.errors.invalidUsers'],
     ];
     expect(getKeyStrings(translation)).toStrictEqual(keyStringsArray);
   });

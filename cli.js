@@ -74,9 +74,9 @@ const generateTypes = async obj => {
   }, `export enum ${stringEnum} {`)}
 }`;
 
-  // Write enums
+  // Write enums to stringTypesPath file
   fs.writeFileSync(
-    `./${argv.stringTypes}`,
+    `./${argv.stringTypesPath}`,
     `${comments}\n\n${enumsWithArgsString}\n\n${enumNoArgsString}`
   );
 
@@ -102,11 +102,11 @@ const generateTypes = async obj => {
     .filter(Boolean)
     .join('\n')}\nfunction translate(key: ${stringEnum}): string;`;
 
-  // Write content to util file
-  const i18nPath = `./${argv.util}`;
-  const i18nPathDir = argv.util.slice(0, argv.util.lastIndexOf('/'));
-  const stringTypesDir = argv.stringTypes.replace(
-    path.extname(argv.stringTypes),
+  // Write content to utilPath file
+  const i18nPath = `./${argv.utilPath}`;
+  const i18nPathDir = argv.utilPath.slice(0, argv.utilPath.lastIndexOf('/'));
+  const stringTypesDir = argv.stringTypesPath.replace(
+    path.extname(argv.stringTypesPath),
     ''
   );
 
