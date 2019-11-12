@@ -1,6 +1,6 @@
 {
   "name": "@postlight/generate-i18n-types",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate il8n string types",
   "main": "cli.js",
   "scripts": {
