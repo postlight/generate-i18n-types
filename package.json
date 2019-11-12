@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint \"**/*.js\" --fix",
     "format": "prettier --write \"**/*.js\"",
-    "test": "jest --updateSnapshot --translations=locales/en/translation.yml --stringTypesPath=src/types/strings.ts --utilPath=src/utils/i18n.ts"
+    "test": "jest --translations=locales/en/translation.yml --stringTypesPath=src/types/strings.ts --utilPath=src/utils/i18n.ts",
+    "test:watch": "jest --watch",
+    "test:updateSnapshot": "jest --updateSnapshot"
   },
   "author": "Postlight",
   "license": "MIT",
