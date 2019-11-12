@@ -30,7 +30,7 @@ Note:
 You may require additional formatting of the generated `utilPath` file. Using Prettier as an example, you can just add the following additional command to the above
 `&& prettier --write ./path/to/i18n.ts`
 
-Once the command succeeds, the files you provided will have the necessary string types and translation functions. Enjoy!
+Once the command succeeds, it will automatically generate the `enum` types for the app strings in the translation file, along with matching function signatures if the strings have dynamic fields. Then you can use the new translations in your code. Enjoy!
 
 ## Example
 
@@ -45,7 +45,7 @@ translation:
   errors:
     invalidUsers: 'The following people could not be invited: {{invalidUsers}}'
 ```
- Then generates the string types for the `stringTypesPath` file
+ Then generates the enum types for the `stringTypesPath` file
 
 ```typescript
 /* tslint:disable */
