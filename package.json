@@ -1,6 +1,6 @@
 {
   "name": "@postlight/generate-i18n-types",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generate il8n string types",
   "main": "cli.js",
   "scripts": {
@@ -26,15 +26,12 @@
     "generate-i18n-types": "./cli.js"
   },
   "dependencies": {
-    "@babel/runtime": "^7.7.2",
-    "i18next": "^19.0.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "yargs-parser": "^16.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
-    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.7.1",
     "@types/jest": "^24.0.22",
     "@types/node": "^12.12.6",
@@ -42,7 +39,6 @@
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.5.0",
-    "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
