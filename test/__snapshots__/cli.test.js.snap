@@ -34,7 +34,7 @@ export {  I18NStrings, I18NStringsWithArgs } from '../types/strings';
 let boundT: typeof i18n.t;
 
 const en = yaml.safeLoad(
-    fs.readFileSync('../../locales/en/translation.yml', 'utf8')
+    fs.readFileSync('./locales/en/translation.yml', 'utf8')
 );
 
 // ==== START OVERLOADED SIGNATURES

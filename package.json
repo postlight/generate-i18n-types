@@ -1,14 +1,13 @@
 {
   "name": "@postlight/generate-i18n-types",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Generate il8n string types",
   "main": "cli.js",
   "scripts": {
     "lint": "eslint \"**/*.js\" --fix",
     "format": "prettier --write \"**/*.js\"",
     "test": "jest --translations=locales/en/translation.yml --stringTypesPath=src/types/strings.ts --utilPath=src/utils/i18n.ts",
-    "test:watch": "jest --watch",
-    "test:updateSnapshot": "jest --updateSnapshot"
+    "test:updateSnapshot": "jest --updateSnapshot --translations=locales/en/translation.yml --stringTypesPath=src/types/strings.ts --utilPath=src/utils/i18n.ts"
   },
   "author": "Postlight",
   "license": "MIT",

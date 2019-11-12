@@ -112,10 +112,7 @@ const generateTypes = async obj => {
 
   const readTranslation =
     'const en = yaml.safeLoad(\n' +
-    `    fs.readFileSync('${path.relative(
-      i18nPathDir,
-      argv.translations
-    )}', 'utf8')\n` +
+    `    fs.readFileSync('./${argv.translations}', 'utf8')\n` +
     `);\n\n`;
 
   const sigils = [
