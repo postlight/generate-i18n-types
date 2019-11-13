@@ -1,12 +1,12 @@
 import fs from 'fs';
 import { exec } from 'child_process';
+import { generateTypes } from '../cli';
 import {
   toType,
-  generateTypes,
   getAllStrings,
   getKeyStrings,
   getString,
-} from '../cli';
+} from '../cli-helpers';
 import translation from './test-helpers';
 
 jest.mock('fs');
@@ -15,16 +15,13 @@ const argv = [...process.argv];
 
 const cli = args => {
   return new Promise(resolve => {
-    exec(
-      `node cli.js ${args.join(' ')} --output`,
-      (error, stdout, stderr) => {
-        resolve({
-          error,
-          stdout,
-          stderr,
-        });
-      }
-    );
+    exec(`node cli.js ${args.join(' ')} --output`, (error, stdout, stderr) => {
+      resolve({
+        error,
+        stdout,
+        stderr,
+      });
+    });
   });
 };
 
@@ -70,8 +67,6 @@ describe('generate-i18n-types', () => {
   it('should return error message if missing a required argument', async () => {
     argv.pop();
     const result = await cli(argv);
-    expect(result.error.toString()).toContain(
-      'Argument check failed: missing required arguments'
-    );
+    expect(result.stdout).toContain('Error: Missing required arguments');
   });
 });

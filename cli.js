@@ -4,37 +4,17 @@ const argv = require('yargs-parser')(process.argv.slice(2));
 const fs = require('fs');
 const yaml = require('js-yaml');
 const path = require('path');
-const { flattenDeep } = require('lodash');
+const commandLineUsage = require('command-line-usage');
+const { sections, getAllStrings, getString, toType } = require('./cli-helpers');
 
 // check for the required arguments
 if (!argv.translations || !argv.utilPath || !argv.stringTypesPath) {
-  throw new Error('Argument check failed: missing required arguments');
+  process.stdout.write(commandLineUsage(sections));
 }
 
 const { translation } = yaml.safeLoad(
   fs.readFileSync(`./${argv.translations}`, 'utf8')
 );
-
-const getKeyStrings = (obj, initialKey = '') => {
-  const keys = Reflect.ownKeys(obj);
-  return keys.map(key =>
-    typeof obj[key] === 'string'
-      ? `${initialKey}.${key}`
-      : getKeyStrings(obj[key], `${initialKey}.${key}`)
-  );
-};
-
-const getString = (obj, key) => key.split('.').reduce((acc, k) => acc[k], obj);
-
-const getAllStrings = obj => {
-  return flattenDeep(getKeyStrings(obj)).map(s => s.slice(1));
-};
-
-const toType = key =>
-  key
-    .split('.')
-    .map(s => s.slice(0, 1).toUpperCase() + s.slice(1))
-    .join('');
 
 const generateTypes = async obj => {
   // Turn json to key utils
@@ -162,9 +142,5 @@ if (translation) {
 }
 
 module.exports = {
-  getKeyStrings,
-  getString,
-  getAllStrings,
   generateTypes,
-  toType,
 };
