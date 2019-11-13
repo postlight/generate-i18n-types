@@ -16,10 +16,9 @@ const argv = [...process.argv];
 const cli = args => {
   return new Promise(resolve => {
     exec(
-      `generate-i18n-types ${args.join(' ')} --output`,
+      `node cli.js ${args.join(' ')} --output`,
       (error, stdout, stderr) => {
         resolve({
-          code: error && error.code ? error.code : 0,
           error,
           stdout,
           stderr,
@@ -74,10 +73,5 @@ describe('generate-i18n-types', () => {
     expect(result.error.toString()).toContain(
       'Argument check failed: missing required arguments'
     );
-  });
-
-  it('should return no error when all arguments are present', async () => {
-    const result = await cli(process.argv);
-    expect(result.error).toBe(null);
   });
 });
