@@ -4,15 +4,20 @@
 
 ## Installation
 
+Install `generate-18n-types` in your devDependencies
 ```shell
-$ yarn add @postlight/generate-18n-types i18next @types/js-yaml
+$ yarn add @postlight/generate-18n-types --dev
 ```
 
-The package also requires installation of `i18next` and `@types/js-yaml`
+The package also requires installation of `i18next` and `js-yaml` as dependencies, along with `@types/i18next` and `@types/js-yaml` to avoid any Typescript errors
+
+```shell
+$ yarn add i18next js-yaml @types/i18next @types/js-yaml --save
+```
 
 ## Usage
 
-This generator accepts 3 arguments to generate your i18n types
+This generator requires 3 arguments to generate your i18n types
 ```shell
 $ generate-i18n-types --translations=path/to/translation.yml --stringTypesPath=path/to/strings.ts --utilPath=path/to/i18n.ts
 ```
@@ -30,7 +35,7 @@ Note:
 You may require additional formatting of the generated `utilPath` file. Using Prettier as an example, you can just add the following additional command to the above
 `&& prettier --write ./path/to/i18n.ts`
 
-Once the command succeeds, it will automatically generate the `enum` types for the app strings in the translation file, along with matching function signatures if the strings have dynamic fields. Then you can use the new translations in your code. Enjoy!
+Once the command succeeds, it will automatically generate the `enum` types for the strings in the translation file, along with matching function signatures if the strings have dynamic fields. Then you can use the new translations in your code. Enjoy!
 
 ## Example
 

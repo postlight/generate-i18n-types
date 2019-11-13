@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { exec } from 'child_process';
 import {
   toType,
   generateTypes,
@@ -9,6 +10,24 @@ import {
 import translation from './test-helpers';
 
 jest.mock('fs');
+
+const argv = [...process.argv];
+
+const cli = args => {
+  return new Promise(resolve => {
+    exec(
+      `generate-i18n-types ${args.join(' ')} --output`,
+      (error, stdout, stderr) => {
+        resolve({
+          code: error && error.code ? error.code : 0,
+          error,
+          stdout,
+          stderr,
+        });
+      }
+    );
+  });
+};
 
 describe('generate-i18n-types', () => {
   it('should have toType return correct type format', () => {
@@ -47,5 +66,18 @@ describe('generate-i18n-types', () => {
     await generateTypes(translation);
     expect(fs.writeFileSync).toBeCalledTimes(2);
     expect(fs.writeFileSync.mock.calls).toMatchSnapshot();
+  });
+
+  it('should return error message if missing a required argument', async () => {
+    argv.pop();
+    const result = await cli(argv);
+    expect(result.error.toString()).toContain(
+      'Argument check failed: missing required arguments'
+    );
+  });
+
+  it('should return no error when all arguments are present', async () => {
+    const result = await cli(process.argv);
+    expect(result.error).toBe(null);
   });
 });

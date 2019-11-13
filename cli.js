@@ -6,6 +6,11 @@ const yaml = require('js-yaml');
 const path = require('path');
 const { flattenDeep } = require('lodash');
 
+// check for the required arguments
+if (!argv.translations || !argv.utilPath || !argv.stringTypesPath) {
+  throw new Error('Argument check failed: missing required arguments');
+}
+
 const { translation } = yaml.safeLoad(
   fs.readFileSync(`./${argv.translations}`, 'utf8')
 );
