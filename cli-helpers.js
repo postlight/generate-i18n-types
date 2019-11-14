@@ -30,7 +30,7 @@ const sections = [
   {
     header: 'generate-i18n-types',
     content:
-      ' generate-18n-types generates types for internationalization strings.',
+      ' generate-i18n-types generates types for internationalization strings.',
   },
   {
     content: '{bold ●  Error: Missing required arguments}',
@@ -41,7 +41,7 @@ const sections = [
       '$ generate-i18n-types {bold --translations}={underline file} {bold --stringTypesPath}={underline file} {bold --utilPath}={underline file}',
   },
   {
-    header: 'Options',
+    header: 'Arguments',
     optionList: optionDefinitions,
   },
 ];
